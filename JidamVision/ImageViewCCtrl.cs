@@ -355,7 +355,7 @@ namespace JidamVision
                     // 이미지 좌표 → 화면 좌표 변환 후 사각형 그리기
                     if (_rectangles != null)
                     {
-                        using (Pen pen = new Pen(Color.LightCoral, 2))
+                        using (Pen pen = new Pen(Color.Red, 2))
                         {
                             foreach (var rect in _rectangles)
                             {
@@ -428,7 +428,7 @@ namespace JidamVision
                     }
 
                     //#MULTI ROI#9 신규 ROI 추가할때, 해당 ROI 그리기
-                    if (_isSelectingRoi && !_roiRect.IsEmpty)
+                    if (_isSelectingRoi && !_roiRect.IsEmpty && Global.Inst.InspStage.CurModel.InspWindowList.Count < 1)
                     {
                         Rectangle rect = VirtualToScreen(_roiRect);
                         using (Pen pen = new Pen(_selColor, 2))
@@ -490,6 +490,14 @@ namespace JidamVision
             {
                 if (_newRoiType != InspWindowType.None)
                 {
+                    // ROI 1개만 가능
+                    if (Global.Inst.InspStage.CurModel.InspWindowList.Count >= 1)
+                    {
+                        Console.WriteLine("ROI는 하나만 그릴 수 있습니다.");
+                        _newRoiType = InspWindowType.None;
+                        return;
+                    }
+
                     //새로운 ROI 그리기 시작 위치 설저어
                     _roiStart = e.Location;
                     _isSelectingRoi = true;

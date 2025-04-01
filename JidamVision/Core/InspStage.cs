@@ -367,6 +367,14 @@ namespace JidamVision.Core
         //#MODEL#9 ImageViwer에서 ROI를 추가하여, InspWindow생성하는 함수
         public void AddInspWindow(InspWindowType windowType, Rect rect)
         {
+            // ROI가 이미 존재하면 추가 금지
+            if (_model.InspWindowList.Count >= 1)
+            {
+                Console.WriteLine("ROI이미 존재함");
+                return;
+            }
+
+
             InspWindow inspWindow = _model.AddInspWindow(windowType);
             if (inspWindow is null)
                 return;
