@@ -149,7 +149,7 @@ namespace JidamVision
             switch (inspWindowType)
             {
                 case InspWindowType.PCB:
-                    color = Color.Red;
+                    color = Color.Yellow;
                     break;
                 //case InspWindowType.Sub:
                 //    color = Color.Brown;
