@@ -154,6 +154,7 @@ namespace JidamVision.Algorithm
                 ResultString.Add(sootInfo);
 
                 _findArea.Add(boundingBoxWithOffset);
+                IsInspected = true;
             }
 
             OutSootCount = findSootCount;

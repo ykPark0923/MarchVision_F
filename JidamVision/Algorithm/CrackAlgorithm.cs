@@ -67,8 +67,6 @@ namespace JidamVision.Algorithm
             Mat diff = new Mat();
             Cv2.Absdiff(aligned1, aligned2, diff);
 
-            Cv2.ImShow("crack_diff", diff);
-
             #region crack은 외곽에만 생김, 내부영역 지워버림
             // 이미지 크기 계산
             int roiWidth = diff.Cols * 90 / 100;   // 전체 너비의 90%
@@ -126,6 +124,7 @@ namespace JidamVision.Algorithm
                     ResultString.Add(crackInfo);
 
                     _findArea.Add(boundingBoxWithOffset);
+                    IsInspected = true;
                 }
 
                 OutCrackCount = findCrackCount;

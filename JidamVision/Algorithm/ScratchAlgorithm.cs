@@ -132,6 +132,7 @@ namespace JidamVision.Algorithm
                         ResultString.Add(scratchInfo);
 
                         _findArea.Add(boundingBoxWithOffset);
+                        IsInspected = true;
                     }
 
                     OutScratchCount = findScratchCount;

@@ -122,6 +122,7 @@ namespace JidamVision.Algorithm
                     ResultString.Add(dentInfo);
 
                     _findArea.Add(boundingBoxWithOffset);
+                    IsInspected = true;
                 }
 
                 OutDentCount = findDentCount;
