@@ -18,7 +18,7 @@ namespace JidamVision.Property
     {
         public event EventHandler<EventArgs> PropertyChanged;
 
-        CrackAlgorithm _crackAlgo = new CrackAlgorithm();
+        CrackAlgorithm _crackAlgo = null;
         public CrackInspProp()
         {
             InitializeComponent();

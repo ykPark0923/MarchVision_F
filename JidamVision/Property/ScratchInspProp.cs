@@ -17,7 +17,7 @@ namespace JidamVision.Property
     {
         public event EventHandler<EventArgs> PropertyChanged;
 
-        ScratchAlgorithm _scratchAlgo = new ScratchAlgorithm();
+        ScratchAlgorithm _scratchAlgo = null;
         public ScratchInspProp()
         {
             InitializeComponent();

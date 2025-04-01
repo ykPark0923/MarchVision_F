@@ -17,7 +17,7 @@ namespace JidamVision.Property
     {
         public event EventHandler<EventArgs> PropertyChanged;
 
-        SootAlgorithm _sootAlgo = new SootAlgorithm();
+        SootAlgorithm _sootAlgo = null;
         public SootInspProp()
         {
             InitializeComponent();
@@ -42,9 +42,6 @@ namespace JidamVision.Property
         {
             if (_sootAlgo is null)
                 return;
-
-
-
 
             int sootAreaMin = _sootAlgo._areaMin;
             int sootAreaMax = _sootAlgo._areaMax;
