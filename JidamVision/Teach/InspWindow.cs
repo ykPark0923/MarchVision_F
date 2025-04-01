@@ -13,6 +13,7 @@ using System.Xml.Serialization;
 using JidamVision.Setting;
 using System.Xml.Linq;
 using JidamVision.Inspect;
+using System.Collections;
 
 namespace JidamVision.Teach
 {
@@ -80,11 +81,6 @@ namespace JidamVision.Teach
 
             foreach (var algorithm in AlgorithmList)
             {
-                if (algorithm.InspectType != InspectType.InspMatch)
-                    continue;
-
-                MatchAlgorithm matchAlgo = (MatchAlgorithm)algorithm;
-
                 if (WindowImage != null)
                 {
                     Mat tempImage = new Mat();
@@ -93,7 +89,32 @@ namespace JidamVision.Teach
                     else
                         tempImage = WindowImage;
 
-                    matchAlgo.SetTemplateImage(tempImage);
+                    switch (algorithm.InspectType)
+                    {
+                        case InspectType.InspMatch:
+                            MatchAlgorithm matchAlgo = (MatchAlgorithm)algorithm;
+                            matchAlgo.SetTemplateImage(tempImage);
+                            break;
+                        case InspectType.InspCrack:
+                            CrackAlgorithm crackhAlgo = (CrackAlgorithm)algorithm;
+                            crackhAlgo.SetTemplateImage(tempImage);
+                            break;
+                        case InspectType.InspScratch:
+                            ScratchAlgorithm scratchAlgo = (ScratchAlgorithm)algorithm;
+                            scratchAlgo.SetTemplateImage(tempImage);
+                            break;
+                        case InspectType.InspDent:
+                            DentAlgorithm dentAlgo = (DentAlgorithm)algorithm;
+                            dentAlgo.SetTemplateImage(tempImage);
+                            break;
+                        case InspectType.InspSoot:
+                            SootAlgorithm sootAlgo = (SootAlgorithm)algorithm;
+                            sootAlgo.SetTemplateImage(tempImage);
+                            break;
+
+                    }
+                        
+
                 }
             }
 

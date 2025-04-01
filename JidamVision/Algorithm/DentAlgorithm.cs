@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using OpenCvSharp;
 
 namespace JidamVision.Algorithm
 {
     public class DentAlgorithm : InspAlgorithm
     {
+        [XmlIgnore]
+        private Mat _templateImage = null;
+        private Mat baseImage = null;
         public int _binaryMin { get; set; } = 30;
         public int _binaryMax { get; set; } = 255;
         public int _areaMin { get; set; } = 26;
@@ -25,6 +29,14 @@ namespace JidamVision.Algorithm
             InspectType = InspectType.InspDent;
         }
 
+        public void SetTemplateImage(Mat templateImage)
+        {
+            _templateImage = templateImage;
+            if (_templateImage.Type() == MatType.CV_8UC3)
+                Cv2.CvtColor(_templateImage, baseImage, ColorConversionCodes.BGR2GRAY);
+            else
+                baseImage = _templateImage;
+        }
         public override bool DoInspect()
         {
 
@@ -48,8 +60,8 @@ namespace JidamVision.Algorithm
             _findArea.Clear();
 
             //비교할 srcImage는 xml과 같은 경로에 있는 images/폴더 아래에 있는 Image.bmp
-            Mat aligned1 = AlignImage(grayImage, _srcImage);
-            Mat aligned2 = AlignImage(_srcImage, _srcImage);
+            Mat aligned1 = AlignImage(grayImage, baseImage);
+            Mat aligned2 = AlignImage(baseImage, baseImage);
 
             if (aligned1 == null || aligned2 == null)
                 return false;

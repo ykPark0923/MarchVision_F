@@ -16,13 +16,13 @@
             if (disposing && (components != null))
             {
                 if (txt_ArMin != null)
-                    txt_ArMin.Leave -= OnFilterChanged;
+                    txt_ArMin.Leave -= OnUpdateValue;
                 if (txt_ArMax != null)
-                    txt_ArMax.Leave -= OnFilterChanged;
+                    txt_ArMax.Leave -= OnUpdateValue;
                 if (txt_ThMin != null)
-                    txt_ThMin.Leave -= OnFilterChanged;
+                    txt_ThMin.Leave -= OnUpdateValue;
                 if (txt_ThMax != null)
-                    txt_ThMax.Leave -= OnFilterChanged;
+                    txt_ThMax.Leave -= OnUpdateValue;
 
                 components.Dispose();
             }

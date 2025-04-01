@@ -24,12 +24,12 @@ namespace JidamVision.Property
 
 
 
-            txt_ArMin.Leave += OnFilterChanged;
-            txt_ArMax.Leave += OnFilterChanged;
-            txt_ThMin.Leave += OnFilterChanged;
-            txt_ThMax.Leave += OnFilterChanged;
-            txt_RtMin.Leave += OnFilterChanged;
-            txt_RtMax.Leave += OnFilterChanged;
+            txt_ArMin.Leave += OnUpdateValue;
+            txt_ArMax.Leave += OnUpdateValue;
+            txt_ThMin.Leave += OnUpdateValue;
+            txt_ThMax.Leave += OnUpdateValue;
+            txt_RtMin.Leave += OnUpdateValue;
+            txt_RtMax.Leave += OnUpdateValue;
         }
 
         public void SetAlgorithm(ScratchAlgorithm scratchAlgo)
@@ -44,12 +44,20 @@ namespace JidamVision.Property
             if (_scratchAlgo is null)
                 return;
 
-            txt_ArMin.Text = _scratchAlgo._areaMin.ToString();
-            txt_ArMax.Text = _scratchAlgo._areaMax.ToString();
-            txt_ThMin.Text = _scratchAlgo._binaryMin.ToString();
-            txt_ThMax.Text = _scratchAlgo._binaryMax.ToString();
-            txt_RtMin.Text = _scratchAlgo._ratioMin.ToString();
-            txt_RtMax.Text = _scratchAlgo._ratioMax.ToString();
+
+            int scratchAreaMin = _scratchAlgo._areaMin;
+            int scratcAreaMax = _scratchAlgo._areaMax;
+            int scratcBinaryMin = _scratchAlgo._binaryMin;
+            int scratcBinaryMax = _scratchAlgo._binaryMax;
+            int scratcRatioMin = _scratchAlgo._ratioMin;
+            int scratcRatioMax = _scratchAlgo._ratioMax;
+
+            txt_ArMin.Text = scratchAreaMin.ToString();
+            txt_ArMax.Text = scratcAreaMax.ToString();
+            txt_ThMin.Text = scratcBinaryMin.ToString();
+            txt_ThMax.Text = scratcBinaryMax.ToString();
+            txt_RtMin.Text = scratcRatioMin.ToString();
+            txt_RtMax.Text = scratcRatioMax.ToString();
         }
 
 
@@ -95,95 +103,68 @@ namespace JidamVision.Property
             }
         }
 
-        private void UpdateBinary()
-        {
-            GetProperty();
-
-        }
-
-        private void OnValueChanged(object sender, EventArgs e)
-        {
-            UpdateBinary();
-        }
 
 
 
 
-        private void OnFilterChanged(object sender, EventArgs e)
+
+        private void OnUpdateValue(object sender, EventArgs e)
         {
             if (_scratchAlgo == null)
                 return;
 
-            if (int.TryParse(txt_ArMin.Text, out int areaMin))
-            {
-                _scratchAlgo._areaMin = areaMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+
+            int areaMin = _scratchAlgo._areaMin;
+            if (!int.TryParse(txt_ArMin.Text, out areaMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMin.Text = _scratchAlgo._areaMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ArMax.Text, out int areaMax))
-            {
-                _scratchAlgo._areaMax = areaMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int areaMax = _scratchAlgo._areaMax;
+            if (!int.TryParse(txt_ArMin.Text, out areaMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMax.Text = _scratchAlgo._areaMax.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMin.Text, out int binaryMin))
-            {
-                _scratchAlgo._binaryMin = binaryMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMin = _scratchAlgo._binaryMin;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMin.Text = _scratchAlgo._binaryMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMax.Text, out int binaryMax))
-            {
-                _scratchAlgo._binaryMax = binaryMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMax = _scratchAlgo._binaryMax;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMax.Text = _scratchAlgo._binaryMax.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_RtMin.Text, out int ratioMin))
-            {
-                _scratchAlgo._ratioMin = ratioMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int ratioMin = _scratchAlgo._ratioMin;
+            if (!int.TryParse(txt_ArMin.Text, out ratioMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMin.Text = _scratchAlgo._binaryMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMax.Text, out int ratioMax))
-            {
-                _scratchAlgo._ratioMin = ratioMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int ratioMax = _scratchAlgo._ratioMax;
+            if (!int.TryParse(txt_ArMin.Text, out ratioMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMax.Text = _scratchAlgo._binaryMax.ToString(); // 기존 값 복원
+                return;
             }
+
+
+            _scratchAlgo._areaMin = areaMin;
+            _scratchAlgo._areaMax = areaMax;
+            _scratchAlgo._binaryMin = binaryMin;
+            _scratchAlgo._binaryMax = binaryMax;
+            _scratchAlgo._ratioMin = ratioMin;
+            _scratchAlgo._ratioMax = ratioMax;
+
+            PropertyChanged?.Invoke(this, null);
         }
     }
 }

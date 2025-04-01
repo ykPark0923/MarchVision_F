@@ -23,10 +23,10 @@ namespace JidamVision.Property
             InitializeComponent();
 
 
-            txt_ArMin.Leave += OnFilterChanged;
-            txt_ArMax.Leave += OnFilterChanged;
-            txt_ThMin.Leave += OnFilterChanged;
-            txt_ThMax.Leave += OnFilterChanged;
+            txt_ArMin.Leave += OnUpdateValue;
+            txt_ArMax.Leave += OnUpdateValue;
+            txt_ThMin.Leave += OnUpdateValue;
+            txt_ThMax.Leave += OnUpdateValue;
         }
 
 
@@ -43,10 +43,18 @@ namespace JidamVision.Property
             if (_sootAlgo is null)
                 return;
 
-            txt_ArMin.Text = _sootAlgo._areaMin.ToString();
-            txt_ArMax.Text = _sootAlgo._areaMax.ToString();
-            txt_ThMin.Text = _sootAlgo._binaryMin.ToString();
-            txt_ThMax.Text = _sootAlgo._binaryMax.ToString();
+
+
+
+            int sootAreaMin = _sootAlgo._areaMin;
+            int sootAreaMax = _sootAlgo._areaMax;
+            int sootBinaryMin = _sootAlgo._binaryMin;
+            int sootBinaryMax = _sootAlgo._binaryMax;
+
+            txt_ArMin.Text = sootAreaMin.ToString();
+            txt_ArMax.Text = sootAreaMax.ToString();
+            txt_ThMin.Text = sootBinaryMin.ToString();
+            txt_ThMax.Text = sootBinaryMax.ToString();
         }
 
 
@@ -80,71 +88,48 @@ namespace JidamVision.Property
             }
         }
 
-        private void UpdateBinary()
-        {
-            GetProperty();
-
-        }
-
-        private void OnValueChanged(object sender, EventArgs e)
-        {
-            UpdateBinary();
-        }
 
 
-
-
-        private void OnFilterChanged(object sender, EventArgs e)
+        private void OnUpdateValue(object sender, EventArgs e)
         {
             if (_sootAlgo == null)
                 return;
 
-            if (int.TryParse(txt_ArMin.Text, out int areaMin))
-            {
-                _sootAlgo._areaMin = areaMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+
+            int areaMin = _sootAlgo._areaMin;
+            if (!int.TryParse(txt_ArMin.Text, out areaMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMin.Text = _sootAlgo._areaMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ArMax.Text, out int areaMax))
-            {
-                _sootAlgo._areaMax = areaMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int areaMax = _sootAlgo._areaMax;
+            if (!int.TryParse(txt_ArMin.Text, out areaMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMax.Text = _sootAlgo._areaMax.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMin.Text, out int widthMin))
-            {
-                _sootAlgo._binaryMin = widthMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMin = _sootAlgo._binaryMin;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMin.Text = _sootAlgo._binaryMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMax.Text, out int widthMax))
-            {
-                _sootAlgo._binaryMax = widthMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMax = _sootAlgo._binaryMax;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMax.Text = _sootAlgo._binaryMax.ToString(); // 기존 값 복원
+                return;
             }
+
+            _sootAlgo._areaMin = areaMin;
+            _sootAlgo._areaMax = areaMax;
+            _sootAlgo._binaryMin = binaryMin;
+            _sootAlgo._binaryMax = binaryMax;
+
+            PropertyChanged?.Invoke(this, null);
         }
     }
 }

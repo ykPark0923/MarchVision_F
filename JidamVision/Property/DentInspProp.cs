@@ -21,10 +21,10 @@ namespace JidamVision.Property
         public DentInspProp()
         {
             InitializeComponent();
-            txt_ArMin.Leave += OnFilterChanged;
-            txt_ArMax.Leave += OnFilterChanged;
-            txt_ThMin.Leave += OnFilterChanged;
-            txt_ThMax.Leave += OnFilterChanged;
+            txt_ArMin.Leave += OnUpdateValue;
+            txt_ArMax.Leave += OnUpdateValue;
+            txt_ThMin.Leave += OnUpdateValue;
+            txt_ThMax.Leave += OnUpdateValue;
         }
 
         public void SetAlgorithm(DentAlgorithm dentAlgo)
@@ -38,10 +38,15 @@ namespace JidamVision.Property
             if (_dentAlgo is null)
                 return;
 
-            txt_ArMin.Text = _dentAlgo._areaMin.ToString();
-            txt_ArMax.Text = _dentAlgo._areaMax.ToString();
-            txt_ThMin.Text = _dentAlgo._binaryMin.ToString();
-            txt_ThMax.Text = _dentAlgo._binaryMax.ToString();
+            int dentAreaMin = _dentAlgo._areaMin;
+            int dentAreaMax = _dentAlgo._areaMax;
+            int dentBinaryMin = _dentAlgo._binaryMin;
+            int dentBinaryMax = _dentAlgo._binaryMax;
+
+            txt_ArMin.Text = dentAreaMin.ToString();
+            txt_ArMax.Text = dentAreaMax.ToString();
+            txt_ThMin.Text = dentBinaryMin.ToString();
+            txt_ThMax.Text = dentBinaryMax.ToString();
         }
 
 
@@ -75,71 +80,50 @@ namespace JidamVision.Property
             }
         }
 
-        private void UpdateBinary()
-        {
-            GetProperty();
-
-        }
-
-        private void OnValueChanged(object sender, EventArgs e)
-        {
-            UpdateBinary();
-        }
 
 
 
 
-        private void OnFilterChanged(object sender, EventArgs e)
+
+        private void OnUpdateValue(object sender, EventArgs e)
         {
             if (_dentAlgo == null)
                 return;
 
-            if (int.TryParse(txt_ArMin.Text, out int areaMin))
-            {
-                _dentAlgo._areaMin = areaMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int areaMin = _dentAlgo._areaMin;
+            if (!int.TryParse(txt_ArMin.Text, out areaMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMin.Text = _dentAlgo._areaMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ArMax.Text, out int areaMax))
-            {
-                _dentAlgo._areaMax = areaMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int areaMax = _dentAlgo._areaMax;
+            if (!int.TryParse(txt_ArMin.Text, out areaMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ArMax.Text = _dentAlgo._areaMax.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMin.Text, out int widthMin))
-            {
-                _dentAlgo._binaryMin = widthMin;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMin = _dentAlgo._binaryMin;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMin))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMin.Text = _dentAlgo._binaryMin.ToString(); // 기존 값 복원
+                return;
             }
 
-
-            if (int.TryParse(txt_ThMax.Text, out int widthMax))
-            {
-                _dentAlgo._binaryMax = widthMax;
-                PropertyChanged?.Invoke(this, null);
-            }
-            else
+            int binaryMax = _dentAlgo._binaryMax;
+            if (!int.TryParse(txt_ArMin.Text, out binaryMax))
             {
                 MessageBox.Show("숫자만 입력 가능합니다.");
-                txt_ThMax.Text = _dentAlgo._binaryMax.ToString(); // 기존 값 복원
+                return;
             }
+
+            _dentAlgo._areaMin = areaMin;
+            _dentAlgo._areaMax = areaMax;
+            _dentAlgo._binaryMin = binaryMin;
+            _dentAlgo._binaryMax = binaryMax;
+
+            PropertyChanged?.Invoke(this, null);
         }
     }
 }
