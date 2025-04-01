@@ -63,6 +63,7 @@ namespace JidamVision
         private Point _moveStart = Point.Empty;
         private int _resizeDirection = -1;
         private const int _ResizeHandleSize = 10;
+        public bool inspectionDone { get; set; } = false;
 
         // 현재 로드된 이미지
         private Bitmap _bitmapImage = null;
@@ -355,12 +356,26 @@ namespace JidamVision
                     // 이미지 좌표 → 화면 좌표 변환 후 사각형 그리기
                     if (_rectangles != null)
                     {
+                        inspectionDone = true;
+
                         using (Pen pen = new Pen(Color.Red, 2))
                         {
                             foreach (var rect in _rectangles)
                             {
                                 Rectangle screenRect = VirtualToScreen(rect);
                                 g.DrawRectangle(pen, screenRect);
+                            }
+                        }
+
+                        if (inspectionDone)
+                        {
+                            // 상태 표시
+                            string statusText = _rectangles.Count > 1 ? "NG" : "OK";
+                            Color statusColor = _rectangles.Count > 1 ? Color.Red : Color.Green;
+                            using (Font statusFont = new Font("Arial", 36, FontStyle.Bold))
+                            using (Brush statusBrush = new SolidBrush(statusColor))
+                            {
+                                g.DrawString(statusText, statusFont, statusBrush, new PointF(10, 10));
                             }
                         }
                     }
