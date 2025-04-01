@@ -111,8 +111,8 @@ namespace JidamVision.Algorithm
                     findDentCount++;
                     // boundingBox의 좌상단 좌표를 계산된 원본 좌표로 보정
                     Rect boundingBoxWithOffset = new Rect(
-                        (int)(boundingBox.X + (originalTopLeft.X - topLeft.X)),
-                        (int)(boundingBox.Y + (originalTopLeft.Y - topLeft.Y)),
+                        (int)(boundingBox.X + (originalTopLeft.X - topLeft.X) + InspRect.X),
+                        (int)(boundingBox.Y + (originalTopLeft.Y - topLeft.Y) + InspRect.Y),
                         boundingBox.Width,
                         boundingBox.Height
                     );
