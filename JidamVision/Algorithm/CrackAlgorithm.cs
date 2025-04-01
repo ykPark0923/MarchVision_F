@@ -60,7 +60,11 @@ namespace JidamVision.Algorithm
 
             //비교할 srcImage는 xml과 같은 경로에 있는 images/폴더 아래에 있는 Image.bmp
             Mat aligned1 = AlignImage(grayImage, baseImage);
-            Mat aligned2 = AlignImage(baseImage, baseImage); 
+            Mat aligned2 = AlignImage(baseImage, baseImage);
+
+
+            Cv2.ImShow("grayImage", grayImage);
+            Cv2.ImShow("baseImage", baseImage);
 
             if (aligned1 == null || aligned2 == null)
                 return false;

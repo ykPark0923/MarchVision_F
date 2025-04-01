@@ -104,31 +104,31 @@ namespace JidamVision.Inspect
                 return false;
 
             //ID 윈도우가 매칭알고리즘이 있고, 검사가 되었다면, 오프셋을 얻는다.
-            //Point alignOffset = new Point(0, 0);
-            //InspWindow idWindow = windowList.Find(w => w.InspWindowType == Core.InspWindowType.ID);
-            //if (idWindow != null)
-            //{
-            //    MatchAlgorithm matchAlgo = (MatchAlgorithm)idWindow.FindInspAlgorithm(InspectType.InspMatch);
-            //    if (matchAlgo != null && matchAlgo.IsUse)
-            //    {
-            //        if (!InspectWindow(idWindow))
-            //            return false;
-            //
-            //        if (matchAlgo.IsInspected)
-            //        {
-            //            alignOffset = matchAlgo.GetOffset();
-            //            idWindow.InspArea = idWindow.WindowArea + alignOffset;
-            //        }
-            //    }
-            //}
-            //
-            //foreach (InspWindow window in windowList)
-            //{
-            //    //모든 윈도우에 오프셋 반영
-            //    window.SetInspOffset(alignOffset);
-            //    if (!InspectWindow(window))
-            //        return false;
-            //}
+            Point alignOffset = new Point(0, 0);
+            InspWindow idWindow = windowList.Find(w => w.InspWindowType == Core.InspWindowType.PCB);
+            if (idWindow != null)
+            {
+                MatchAlgorithm matchAlgo = (MatchAlgorithm)idWindow.FindInspAlgorithm(InspectType.InspMatch);
+                if (matchAlgo != null && matchAlgo.IsUse)
+                {
+                    if (!InspectWindow(idWindow))
+                        return false;
+
+                    if (matchAlgo.IsInspected)
+                    {
+                        alignOffset = matchAlgo.GetOffset();
+                        idWindow.InspArea = idWindow.WindowArea + alignOffset;
+                    }
+                }
+            }
+
+            foreach (InspWindow window in windowList)
+            {
+                //모든 윈도우에 오프셋 반영
+                window.SetInspOffset(alignOffset);
+                if (!InspectWindow(window))
+                    return false;
+            }
 
             return true;
         }

@@ -196,7 +196,7 @@ namespace JidamVision.Algorithm
 
             OutPoint = new Point(0, 0);
             OutPoints.Clear();
-            OutScore = 0;
+            MatchScore = 0;
 
             if (_templateImage is null)
             {
@@ -233,7 +233,7 @@ namespace JidamVision.Algorithm
                 OutPoints.Add(OutPoint);
 
                 Point matchPos = new Point(OutPoint.X + halfWidth, OutPoint.Y + halfHeight);
-                IsDefect = (OutScore >= MatchScore) ? false : true;
+                IsDefect = (OutScore >= MatchScore) ? true : false;
                 string defectInfo = IsDefect ? "NG" : "OK";
                 string resultInfo = $"[{defectInfo}] 매칭 결과 : X {matchPos.X}, Y {matchPos.Y}, Score {OutScore}";
                 ResultString.Add(resultInfo);
