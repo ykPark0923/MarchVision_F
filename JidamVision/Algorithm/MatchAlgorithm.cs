@@ -211,6 +211,12 @@ namespace JidamVision.Algorithm
             }
 
             Mat srcImage = Global.Inst.InspStage.GetMat(0, ImageChannel);
+            if (srcImage is null)
+            {
+                MessageBox.Show("srcImage  is null!");
+                return false;
+
+            }
 
             Rect ExtArea = InspRect;
             ExtArea.Inflate(ExtSize);

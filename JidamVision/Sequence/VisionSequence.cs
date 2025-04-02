@@ -40,7 +40,7 @@ namespace JidamVision.Sequence
     {
         None = 0,
         InspDone,               //비젼 -> 제어 : 검사 완료 및 결과 반환
-        InspEnd,                
+        InspEnd,
         Error
     }
 
@@ -287,7 +287,7 @@ namespace JidamVision.Sequence
                     break;
                 case Message.MessageCommand.OpenRecipe:
                     {
-                        if(e.Status == Message.CommandStatus.Success)
+                        if (e.Status == Message.CommandStatus.Success)
                         {
                             //비젼의 요청에 의해, OpenRecipe가 성공한 경우
                             _mmiOpenRecipe = true;
@@ -373,7 +373,7 @@ namespace JidamVision.Sequence
                         bool isDefect = (bool)e;
 
                         _message.Command = Message.MessageCommand.InspDone;
-                        _message.Status = isDefect ? CommandStatus.Ng :CommandStatus.Good;
+                        _message.Status = isDefect ? CommandStatus.Ng : CommandStatus.Good;
                         SendMessage(_message);
                     }
                     break;
@@ -402,8 +402,8 @@ namespace JidamVision.Sequence
                 _communicator.Create(CommunicatorType.WCF, SettingXml.Inst.CommIP);
                 if (_communicator.State == System.ServiceModel.CommunicationState.Opened)
                 {
-                    _communicator.SendMessage(CreateMachineNameMessage(machineName));
-                    SLogger.Write("WCF " + machineName + " : Opened",  LogType.Info);
+                    _communicator.SendMachineInfo();
+                    SLogger.Write("WCF " + machineName + " : Opened", LogType.Info);
                     IsMmiConnected = true;
                 }
                 else

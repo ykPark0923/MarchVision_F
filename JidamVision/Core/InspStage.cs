@@ -167,7 +167,7 @@ namespace JidamVision.Core
 
             if (_camType == CameraType.HikRobotCam)
             {
-                _grabManager.SetExposureTime(20000);
+                _grabManager.SetExposureTime(30000);
                 _grabManager.SetGain(1.4f);
                 _grabManager.Grab(0);
 
