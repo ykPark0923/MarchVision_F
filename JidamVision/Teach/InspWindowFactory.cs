@@ -42,7 +42,7 @@ namespace JidamVision.Teach
             //    inspWindow = new InspWindow(windowType,name);
             inspWindow = new InspWindow(windowType, name);
 
-            if (inspWindow is null) 
+            if(inspWindow is null) 
                 return null;
 
             if(!_windowTypeNo.ContainsKey(name))
