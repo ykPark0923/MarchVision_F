@@ -32,7 +32,7 @@ namespace JidamVision
         private SplitContainer _splitContainer;
         private TreeListView _treeListView;
         private TextBox _txtDetails;
-        public TreeListView TreeListView => _treeListView;
+
         public ResultForm()
         {
             InitializeComponent();
@@ -180,39 +180,19 @@ namespace JidamVision
             if (inspResult is null)
                 return;
 
-            InspWindow parentWindow = inspResult.InspObject;
-
-            if (parentWindow == null)
-            {
-                parentWindow = new InspWindow
-                {
-                    UID = inspResult.GroupID,
-                    InspResultList = new List<InspResult>()
-                };
-                inspResult.InspObject = parentWindow;
-            }
-
-            List<InspWindow> existingWindows = (_treeListView.Objects as IEnumerable<InspWindow>)?.ToList();
-
             // 현재 트리에 있는 객체 리스트 가져오기
-            if (existingWindows == null)
-                existingWindows = new List<InspWindow>();
+            var existingResults = _treeListView.Objects as List<InspResult>;
+
+            if (existingResults == null)
+                existingResults = new List<InspResult>();
 
             // 기존 검사 결과에서 같은 BodyID를 가진 부모 찾기
-            var existingParent = existingWindows.FirstOrDefault(w => w.UID == parentWindow.UID);
-            if (existingParent == null)
-            {
-                parentWindow.InspResultList.Add(inspResult);
-                existingWindows.Add(parentWindow);
-            }
-            else
-            {
-                existingParent.InspResultList.Add(inspResult);
-            }
+            var parentResult = existingResults.FirstOrDefault(r => r.GroupID == inspResult.GroupID);
+
+            existingResults.Add(inspResult);
 
             // TreeListView 업데이트
-            _treeListView.SetObjects(existingWindows);
-            _treeListView.Expand(parentWindow);
+            _treeListView.SetObjects(existingResults);
         }
 
         //해당 트리 리스트 뷰 선택시, 상세 정보 텍스트 박스에 표시

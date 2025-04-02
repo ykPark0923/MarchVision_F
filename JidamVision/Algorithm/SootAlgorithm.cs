@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
-using JidamVision.Teach;
 using OpenCvSharp;
 
 namespace JidamVision.Algorithm
@@ -156,35 +155,6 @@ namespace JidamVision.Algorithm
 
                 _findArea.Add(boundingBoxWithOffset);
                 IsInspected = true;
-            }
-
-            ResultForm resultForm = MainForm.GetDockForm<ResultForm>();
-
-            int sootCountFromResult = this.SootCount;
-
-            if (resultForm != null)
-            {
-                var existingWindows = (resultForm.TreeListView.Objects as IEnumerable<InspWindow>)?.ToList();
-                if (existingWindows != null)
-                {
-                    var matchedWindow = existingWindows.FirstOrDefault(w => w.UID == this.InspRect.ToString());
-                    if (matchedWindow != null)
-                    {
-                        var matchedResult = matchedWindow.InspResultList
-                            .FirstOrDefault(res => res.InspType == this.InspectType);
-
-                        if (matchedResult != null)
-                        {
-                            var match = System.Text.RegularExpressions.Regex.Match(
-                                matchedResult.ResultInfos, @"in : (\d+)");
-
-                            if (match.Success)
-                            {
-                                sootCountFromResult = int.Parse(match.Groups[1].Value);
-                            }
-                        }
-                    }
-                }
             }
 
             OutSootCount = findSootCount;
