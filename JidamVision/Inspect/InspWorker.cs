@@ -138,16 +138,6 @@ namespace JidamVision.Inspect
 
                 //inspWindow.DoInspect(InspectType.InspNone);
                 DisplayResult(inspWindow, InspectType.InspNone);
-
-                // ✅ 검사 결과 트리뷰에 추가로 표시
-                //if (inspWindow.InspResultList != null)
-                //{
-                //    foreach (var result in inspWindow.InspResultList)
-                //    {
-                //        // ✅ 트리뷰의 기존 구조 유지하고, 자식 노드만 갱신
-                //        resultForm?.RefreshWindow(inspWindow);  // <- 새로 추가할 함수
-                //    }
-                //}
             }
 
             return true;

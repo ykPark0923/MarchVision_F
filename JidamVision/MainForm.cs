@@ -75,8 +75,8 @@ namespace JidamVision
         //제네릭 함수 사용를 이용해 입력된 타입의 폼 객체 얻기
         public static T GetDockForm<T>() where T : DockContent
         {
-            var findForm = _dockPanel.Contents.OfType<T>().FirstOrDefault();
-            return findForm;
+            if (_dockPanel == null) return null;
+            return _dockPanel.Contents.OfType<T>().FirstOrDefault();
         }
 
         //#MODEL SAVE#4 아래 메뉴 추가 

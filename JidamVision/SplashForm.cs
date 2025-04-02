@@ -27,7 +27,7 @@ namespace JidamVision
                 PictureBox logo = new PictureBox
                 {
                     Image = Image.FromFile(imagePath),
-                    SizeMode = PictureBoxSizeMode.StretchImage,  // ✅ 꽉 채우기
+                    SizeMode = PictureBoxSizeMode.StretchImage,  // 꽉 채우기
                     Dock = DockStyle.Fill
                 };
                 Controls.Add(logo);
