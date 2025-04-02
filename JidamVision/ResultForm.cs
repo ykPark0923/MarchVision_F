@@ -151,6 +151,12 @@ namespace JidamVision
             if (curModel is null)
                 return;
 
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => AddModelResult(curModel)));
+                return;
+            }
+
             _treeListView.SetObjects(curModel.InspWindowList);
 
             foreach (var window in curModel.InspWindowList)
@@ -217,6 +223,20 @@ namespace JidamVision
                 _txtDetails.Text = $"{window.UID}\r\n" +
                     string.Join("\r\n", infos);
             }
+        }
+
+        public void RefreshWindow(InspWindow inspWindow)
+        {
+            if (inspWindow == null)
+                return;
+
+            _treeListView.RefreshObject(inspWindow);
+            foreach (var child in inspWindow.InspResultList)
+            {
+                _treeListView.RefreshObject(child);
+            }
+
+            _treeListView.Expand(inspWindow);
         }
     }
 }

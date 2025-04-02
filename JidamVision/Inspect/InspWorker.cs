@@ -114,22 +114,40 @@ namespace JidamVision.Inspect
             isDefect = false;
             Model curMode = Global.Inst.InspStage.CurModel;
             List<InspWindow> inspWindowList = curMode.InspWindowList;
+            var resultForm = MainForm.GetDockForm<ResultForm>();
+            resultForm?.AddModelResult(curMode); // 전체 트리 뷰 구조 잡아줌
+
             foreach (var inspWindow in inspWindowList)
             {
-                if (inspWindow is null)
+                if (inspWindow == null)
                     continue;
 
-                UpdateInspData(inspWindow);
+                List<InspAlgorithm> algorithmList = inspWindow.AlgorithmList;
+                foreach (InspAlgorithm algorithm in algorithmList)
+                {
+                    UpdateInspData(inspWindow);
+                }
             }
 
             _inspectBoard.InspectWindowList(inspWindowList);
 
-            foreach (var inspWindow in inspWindowList)
+            foreach (InspWindow inspWindow in inspWindowList)
             {
-                if (!isDefect && inspWindow.IsDefect())
-                    isDefect = true;
+                if (inspWindow == null)
+                    continue;
 
+                //inspWindow.DoInspect(InspectType.InspNone);
                 DisplayResult(inspWindow, InspectType.InspNone);
+
+                // ✅ 검사 결과 트리뷰에 추가로 표시
+                if (inspWindow.InspResultList != null)
+                {
+                    foreach (var result in inspWindow.InspResultList)
+                    {
+                        // ✅ 트리뷰의 기존 구조 유지하고, 자식 노드만 갱신
+                        resultForm?.RefreshWindow(inspWindow);  // <- 새로 추가할 함수
+                    }
+                }
             }
 
             return true;
