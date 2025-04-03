@@ -31,7 +31,8 @@ namespace JidamVision
             Controls.Add(_dockPanel);
 
             // Visual Studio 2015 테마 적용
-            _dockPanel.Theme = new VS2015BlueTheme();
+            //_dockPanel.Theme = new VS2015BlueTheme();
+            _dockPanel.Theme = new VS2015DarkTheme();
 
             LoadDockingWindows();
 
@@ -50,12 +51,12 @@ namespace JidamVision
             cameraWindow.Show(_dockPanel, DockState.Document);
 
             //검사 결과창 30% 비율로 추가
-            var resultWindow = new ResultForm();
-            resultWindow.Show(cameraWindow.Pane, DockAlignment.Bottom, 0.3);
+            var logform = new LogForm();
+            logform.Show(cameraWindow.Pane, DockAlignment.Bottom, 0.2);
 
-            //# MODEL TREE#3 검사 결과창 우측에 40% 비율로 모델트리 추가
-            var modelTreeWindow = new ModelTreeForm();
-            modelTreeWindow.Show(resultWindow.Pane, DockAlignment.Right, 0.4);
+            ////# MODEL TREE#3 검사 결과창 우측에 40% 비율로 모델트리 추가
+            //var modelTreeWindow = new ModelTreeForm();
+            //modelTreeWindow.Show(resultWindow.Pane, DockAlignment.Right, 0.4);
 
             //속성창 추가
             var propWindow = new PropertiesForm();
@@ -65,11 +66,15 @@ namespace JidamVision
             var statisticWindow = new StatisticForm();
             statisticWindow.Show(_dockPanel, DockState.DockRight);
 
+            //모델트리
+            var modelTreeWindow = new ModelTreeForm();
+            modelTreeWindow.Show(propWindow.Pane, DockAlignment.Bottom, 0.6);
+
             propWindow.Activate();
 
             //로그창 50% 비율로 추가
-            var logWindow = new LogForm();
-            logWindow.Show(propWindow.Pane, DockAlignment.Bottom, 0.3);
+            var resultWindow = new ResultForm();
+            resultWindow.Show(modelTreeWindow.Pane, DockAlignment.Bottom, 0.6);
         }
 
         //제네릭 함수 사용를 이용해 입력된 타입의 폼 객체 얻기

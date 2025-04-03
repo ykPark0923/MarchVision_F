@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraForm));
             this.btnGrab = new System.Windows.Forms.Button();
             this.btnLive = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -48,23 +49,25 @@
             // 
             // btnGrab
             // 
+            this.btnGrab.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGrab.BackgroundImage")));
+            this.btnGrab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnGrab.Location = new System.Drawing.Point(554, 18);
-            this.btnGrab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGrab.Margin = new System.Windows.Forms.Padding(4);
             this.btnGrab.Name = "btnGrab";
             this.btnGrab.Size = new System.Drawing.Size(107, 34);
             this.btnGrab.TabIndex = 1;
-            this.btnGrab.Text = "Grab";
             this.btnGrab.UseVisualStyleBackColor = true;
             this.btnGrab.Click += new System.EventHandler(this.btnGrab_Click);
             // 
             // btnLive
             // 
+            this.btnLive.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLive.BackgroundImage")));
+            this.btnLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLive.Location = new System.Drawing.Point(554, 60);
-            this.btnLive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLive.Margin = new System.Windows.Forms.Padding(4);
             this.btnLive.Name = "btnLive";
             this.btnLive.Size = new System.Drawing.Size(107, 34);
             this.btnLive.TabIndex = 3;
-            this.btnLive.Text = "Live";
             this.btnLive.UseVisualStyleBackColor = true;
             this.btnLive.Click += new System.EventHandler(this.btnLive_Click);
             // 
@@ -81,12 +84,13 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Channel";
+            this.groupBox1.Visible = false;
             // 
             // rbtnColor
             // 
             this.rbtnColor.AutoSize = true;
             this.rbtnColor.Location = new System.Drawing.Point(10, 28);
-            this.rbtnColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbtnColor.Margin = new System.Windows.Forms.Padding(4);
             this.rbtnColor.Name = "rbtnColor";
             this.rbtnColor.Size = new System.Drawing.Size(76, 22);
             this.rbtnColor.TabIndex = 4;
@@ -144,23 +148,25 @@
             // 
             // btnInspect
             // 
+            this.btnInspect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnInspect.BackgroundImage")));
+            this.btnInspect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnInspect.Location = new System.Drawing.Point(552, 146);
-            this.btnInspect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnInspect.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspect.Name = "btnInspect";
             this.btnInspect.Size = new System.Drawing.Size(107, 36);
             this.btnInspect.TabIndex = 6;
-            this.btnInspect.Text = "검사";
             this.btnInspect.UseVisualStyleBackColor = true;
             this.btnInspect.Click += new System.EventHandler(this.btnInspect_Click);
             // 
             // btnStop
             // 
+            this.btnStop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnStop.BackgroundImage")));
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStop.Location = new System.Drawing.Point(554, 190);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(107, 40);
             this.btnStop.TabIndex = 7;
-            this.btnStop.Text = "정지";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
@@ -168,7 +174,7 @@
             // 
             this.chkCycle.AutoSize = true;
             this.chkCycle.Location = new System.Drawing.Point(556, 240);
-            this.chkCycle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCycle.Margin = new System.Windows.Forms.Padding(4);
             this.chkCycle.Name = "chkCycle";
             this.chkCycle.Size = new System.Drawing.Size(79, 22);
             this.chkCycle.TabIndex = 8;
@@ -178,13 +184,14 @@
             // chkPreview
             // 
             this.chkPreview.AutoSize = true;
-            this.chkPreview.Location = new System.Drawing.Point(556, 274);
-            this.chkPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkPreview.Location = new System.Drawing.Point(554, 300);
+            this.chkPreview.Margin = new System.Windows.Forms.Padding(4);
             this.chkPreview.Name = "chkPreview";
             this.chkPreview.Size = new System.Drawing.Size(98, 22);
             this.chkPreview.TabIndex = 9;
             this.chkPreview.Text = "Preview";
             this.chkPreview.UseVisualStyleBackColor = true;
+            this.chkPreview.Visible = false;
             this.chkPreview.CheckedChanged += new System.EventHandler(this.chkPreview_CheckedChanged);
             // 
             // chkShowROI
@@ -192,8 +199,8 @@
             this.chkShowROI.AutoSize = true;
             this.chkShowROI.Checked = true;
             this.chkShowROI.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkShowROI.Location = new System.Drawing.Point(556, 304);
-            this.chkShowROI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkShowROI.Location = new System.Drawing.Point(556, 270);
+            this.chkShowROI.Margin = new System.Windows.Forms.Padding(4);
             this.chkShowROI.Name = "chkShowROI";
             this.chkShowROI.Size = new System.Drawing.Size(113, 22);
             this.chkShowROI.TabIndex = 9;
@@ -203,19 +210,22 @@
             // 
             // btnAutoRun
             // 
+            this.btnAutoRun.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAutoRun.BackgroundImage")));
+            this.btnAutoRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAutoRun.Location = new System.Drawing.Point(554, 102);
             this.btnAutoRun.Margin = new System.Windows.Forms.Padding(4);
             this.btnAutoRun.Name = "btnAutoRun";
             this.btnAutoRun.Size = new System.Drawing.Size(107, 36);
             this.btnAutoRun.TabIndex = 10;
-            this.btnAutoRun.Text = "자동 검사";
             this.btnAutoRun.UseVisualStyleBackColor = true;
             this.btnAutoRun.Click += new System.EventHandler(this.btnAutoRun_Click);
             // 
             // imageViewer
             // 
             this.imageViewer.AutoSize = true;
+            this.imageViewer.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.imageViewer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imageViewer.inspectionDone = false;
             this.imageViewer.Location = new System.Drawing.Point(15, 9);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(6);
             this.imageViewer.Name = "imageViewer";
@@ -237,7 +247,7 @@
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.imageViewer);
             this.Controls.Add(this.btnGrab);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CameraForm";
             this.Text = "CameraForm";
             this.Load += new System.EventHandler(this.CameraForm_Load);

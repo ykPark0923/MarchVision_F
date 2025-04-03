@@ -126,7 +126,8 @@ namespace JidamVision
         {
             int margin = 10;
 
-            int xPos = Location.X + this.Width - btnGrab.Width - margin;
+            //int xPos = Location.X + this.Width - btnGrab.Width - margin;
+            int xPos = margin;
 
             btnGrab.Location = new System.Drawing.Point(xPos, btnGrab.Location.Y);
             btnLive.Location = new System.Drawing.Point(xPos, btnLive.Location.Y);
@@ -140,10 +141,11 @@ namespace JidamVision
             int yPos = this.Height - margin - groupBox1.Height;
             groupBox1.Location = new System.Drawing.Point(xPos, yPos);
 
-            imageViewer.Width = this.Width - btnGrab.Width - margin * 2;
-            imageViewer.Height = this.Height - margin * 2;
+            imageViewer.Width = this.Width - btnGrab.Width - margin * 3;
+            imageViewer.Height = this.Height - margin * 3;
 
-            imageViewer.Location = new System.Drawing.Point(margin, margin);
+            //imageViewer.Location = new System.Drawing.Point(margin, margin);
+            imageViewer.Location = new System.Drawing.Point(this.Width - imageViewer.Width - margin, margin);
         }
 
         private void btnGrab_Click(object sender, EventArgs e)
