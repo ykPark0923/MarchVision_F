@@ -111,6 +111,8 @@ namespace JidamVision.Teach
                             SootAlgorithm sootAlgo = (SootAlgorithm)algorithm;
                             sootAlgo.SetTemplateImage(tempImage);
                             break;
+                        case InspectType.InspSaige://*****************************************************
+                            break;
 
                     }
                         
@@ -147,6 +149,9 @@ namespace JidamVision.Teach
                     break; ;
                 case InspectType.InspSoot:
                     inspAlgo = new SootAlgorithm();
+                    break;
+                case InspectType.InspSaige:
+                    //***********************************************************
                     break;
             }
 

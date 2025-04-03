@@ -33,6 +33,9 @@ namespace JidamVision.Inspect
 
         private InspectBoard _inspectBoard = new InspectBoard();
 
+
+        InspSaige inspSaige = new InspSaige();
+
         public InspWorker(int threadCount)
         {
             _threadCount = threadCount;
@@ -40,6 +43,7 @@ namespace JidamVision.Inspect
 
         public InspWorker()
         {
+            inspSaige.InitializeSaige();
         }
 
         public void AddJob(InspWindow job)
@@ -276,19 +280,47 @@ namespace JidamVision.Inspect
 
                 List<Rect> resultArea = new List<Rect>();
                 int resultCnt = algorithm.GetResultRect(out resultArea);
-                if (resultCnt > 0)
+                if (resultCnt > 10000)
                 {
                     totalArea.AddRange(resultArea);
                 }
             }
 
-            if (totalArea.Count > 0)
+            if (totalArea.Count > 10000)
             {
                 //찾은 위치를 이미지상에서 표시
                 var cameraForm = MainForm.GetDockForm<CameraForm>();
                 if (cameraForm != null)
                 {
                     cameraForm.AddRect(totalArea);
+                }
+            }
+            else
+            {
+                //Global에서 ImageSpace 가져오기
+                ImageSpace imageSpace = Global.Inst.InspStage.ImageSpace;
+
+                if (imageSpace != null)
+                {
+                    //inspSaige.SetSrcImage(imageSpace); // ⬅ 여기서 srImage 설정
+                    inspSaige.doInspect(imageSpace);
+                }
+
+                List<Rect> resultArea = new List<Rect>();
+                int resultCnt = inspSaige.GetResultRect(out resultArea);
+                if (resultCnt > 0)
+                {
+                    totalArea.AddRange(resultArea);
+
+                    //if (totalArea.Count > 0)
+                    //{
+                        //찾은 위치를 이미지상에서 표시
+                        var cameraForm = MainForm.GetDockForm<CameraForm>();
+                        if (cameraForm != null)
+                        {
+                            cameraForm.AddRect(totalArea);
+                        }
+                    //}
                 }
             }
 

@@ -34,6 +34,7 @@ namespace JidamVision
         InspDent,
         InspScratch,
         InspSoot,
+        InspSaige,
         InspCount
     }
 

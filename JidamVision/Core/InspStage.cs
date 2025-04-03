@@ -21,6 +21,7 @@ using System.Security.Policy;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -167,7 +168,7 @@ namespace JidamVision.Core
 
             if (_camType == CameraType.HikRobotCam)
             {
-                _grabManager.SetExposureTime(30000);
+                _grabManager.SetExposureTime(25000);
                 _grabManager.SetGain(1.4f);
                 _grabManager.Grab(0);
 
@@ -685,6 +686,7 @@ namespace JidamVision.Core
                         //#WCF_FSM#5 카메라 촬상 후, 검사 진행
                         SLogger.Write("MMI : InspStart", SLogger.LogType.Info);
 
+                        Thread.Sleep(500);
                         //검사 시작
                         string errMsg = "";
                         

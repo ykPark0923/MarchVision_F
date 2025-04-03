@@ -86,6 +86,9 @@ namespace JidamVision.Inspect
                         SootAlgorithm sootAlgo = algo as SootAlgorithm;
                         //inspResult.ResultValue = $"{crackAlgo.OutScore}";
                         break;
+                    case InspectType.InspSaige:
+                        //inspResult.ResultValue = $"{crackAlgo.OutScore}";
+                        break;
                 }
 
                 List<Rect> resultArea = new List<Rect>();

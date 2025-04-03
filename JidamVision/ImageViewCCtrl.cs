@@ -366,19 +366,34 @@ namespace JidamVision
                                 g.DrawRectangle(pen, screenRect);
                             }
                         }
-
-                        if (inspectionDone)
+                        if(_rectangles.Count > 0)
                         {
+
+
                             // 상태 표시
-                            string statusText = _rectangles.Count > 1 ? "NG" : "OK";
-                            Color statusColor = _rectangles.Count > 1 ? Color.Red : Color.Green;
+                            string statusText =  "NG" ;
+                            Color statusColor = Color.Red;
                             using (Font statusFont = new Font("Arial", 36, FontStyle.Bold))
                             using (Brush statusBrush = new SolidBrush(statusColor))
                             {
                                 g.DrawString(statusText, statusFont, statusBrush, new PointF(10, 10));
                             }
                         }
+                        else
+                        {
+                            // 상태 표시
+                            string statusText = "OK";
+                            Color statusColor = Color.Green;
+                            using (Font statusFont = new Font("Arial", 36, FontStyle.Bold))
+                            using (Brush statusBrush = new SolidBrush(statusColor))
+                            {
+                                g.DrawString(statusText, statusFont, statusBrush, new PointF(10, 10));
+                            }
+                        }
+
+
                     }
+
 
                     //#MULTI ROI#8 여러개 ROI를 그려주는 코드
                     //#GROUP ROI#8 멀티ROI 처리

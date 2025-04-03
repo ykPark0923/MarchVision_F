@@ -43,7 +43,7 @@ namespace JidamVision.Grab
                     _pixelConvertParam.pSrcData = pData;
                     _pixelConvertParam.nSrcDataLen = pFrameInfo.nFrameLen;
                     _pixelConvertParam.enSrcPixelType = pFrameInfo.enPixelType;
-                    _pixelConvertParam.enDstPixelType = MvGvspPixelType.PixelType_Gvsp_RGB8_Packed;
+                    _pixelConvertParam.enDstPixelType = MvGvspPixelType.PixelType_Gvsp_BGR8_Packed;
                     _pixelConvertParam.pDstBuffer = _userImageBuffer[BufferIndex].ImageBufferPtr;
                     _pixelConvertParam.nDstBufferSize = pFrameInfo.nFrameLen * 3;
 

@@ -333,7 +333,7 @@ namespace JidamVision.Sequence
         }
 
         //비젼 -> MMI에게 Command 전송
-        public void VisionCommand(Vision2Mmi visionCmd, Object e)
+        public async void VisionCommand(Vision2Mmi visionCmd, Object e)
         {
             switch (visionCmd)
             {
@@ -371,9 +371,10 @@ namespace JidamVision.Sequence
                     {
                         //#WCF_FSM#7 제어에 Ng/Good 결과를 담아 검사 완료 명령 전송
                         bool isDefect = (bool)e;
-
+                        Thread.Sleep(3000);
                         _message.Command = Message.MessageCommand.InspDone;
                         _message.Status = isDefect ? CommandStatus.Ng : CommandStatus.Good;
+
                         SendMessage(_message);
                     }
                     break;

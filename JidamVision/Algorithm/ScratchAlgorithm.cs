@@ -11,7 +11,7 @@ namespace JidamVision.Algorithm
         [XmlIgnore]
         private Mat _templateImage = null;
         private Mat baseImage = null;
-        public int _binaryMin { get; set; } = 20;
+        public int _binaryMin { get; set; } = 40;
         public int _binaryMax { get; set; } = 255;
         public int _areaMin { get; set; } = 10;
         public int _areaMax { get; set; } = 600;
